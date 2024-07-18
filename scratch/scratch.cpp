@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: MIT
 //
 #include <iostream>
-#include <mylib/mylib.hpp>
+#include <polyrand/polyrand.h>
 
 int main() {
-    std::cout << mylib::add{4}(1, 10) << '\n';
+    std::cout << add(4, 1, 10) << '\n';
 }

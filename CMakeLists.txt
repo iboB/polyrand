@@ -3,7 +3,7 @@
 #
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
-project(mylib
+project(polyrand
     LANGUAGES C CXX
 )
 
@@ -28,30 +28,24 @@ include(icm_dev_mode)
 # options
 
 option(BUILD_SHARED_LIBS "${CMAKE_PROJECT_NAME}: build shared libraries" ON)
-option(MYLIB_BUILD_TESTS "${CMAKE_PROJECT_NAME}: enable testing and build tests" ${ICM_DEV_MODE})
-option(MYLIB_BUILD_EXAMPLES "${CMAKE_PROJECT_NAME}: build examples" ${ICM_DEV_MODE})
-option(MYLIB_BUILD_TUTORIALS "${CMAKE_PROJECT_NAME}: build tutorials" ${ICM_DEV_MODE})
-option(MYLIB_BUILD_BENCH "${CMAKE_PROJECT_NAME}: build benchmarks" ${ICM_DEV_MODE})
-option(MYLIB_BUILD_SCRATCH "${CMAKE_PROJECT_NAME}: build scratch project (dev experiments)" ${ICM_DEV_MODE})
-mark_as_advanced(MYLIB_BUILD_SCRATCH)
+option(POLYRAND_BUILD_TESTS "${CMAKE_PROJECT_NAME}: enable testing and build tests" ${ICM_DEV_MODE})
+option(POLYRAND_BUILD_EXAMPLES "${CMAKE_PROJECT_NAME}: build examples" ${ICM_DEV_MODE})
+option(POLYRAND_BUILD_SCRATCH "${CMAKE_PROJECT_NAME}: build scratch project (dev experiments)" ${ICM_DEV_MODE})
+mark_as_advanced(POLYRAND_BUILD_SCRATCH)
 
 #######################################
 # code
 add_subdirectory(code)
 
-if(MYLIB_BUILD_SCRATCH)
+if(POLYRAND_BUILD_SCRATCH)
     add_subdirectory(scratch)
 endif()
 
-if(MYLIB_BUILD_TESTS)
+if(POLYRAND_BUILD_TESTS)
     enable_testing()
     add_subdirectory(test)
 endif()
 
-if(MYLIB_BUILD_BENCH)
-    add_subdirectory(bench)
-endif()
-
-if(MYLIB_BUILD_EXAMPLES)
+if(POLYRAND_BUILD_EXAMPLES)
     add_subdirectory(example)
 endif()

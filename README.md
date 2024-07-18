@@ -1,8 +1,8 @@
-# cpp-lib-template
+# polyrand
 
-[![Language](https://img.shields.io/badge/language-C++-blue.svg)](https://isocpp.org/) [![Standard](https://img.shields.io/badge/C%2B%2B-20-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B#Standardization) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Standard](https://img.shields.io/badge/C%2B%2B-11-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B11) [![Standard](https://img.shields.io/badge/C-99-purple.svg)](https://en.wikipedia.org/wiki/C99) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-A template for a C++ library
+A library for polymorphic random number generation for C and C++
 
 ## License
 

@@ -1,8 +1,8 @@
 # Copyright (c) Borislav Stanimirov
 # SPDX-License-Identifier: MIT
 #
-add_executable(mylib-scratch
+add_executable(polyrand-scratch
     scratch.cpp
 )
-target_link_libraries(mylib-scratch mylib::mylib)
-set_target_properties(mylib-scratch PROPERTIES FOLDER scratch)
+target_link_libraries(polyrand-scratch polyrand::polyrand)
+set_target_properties(polyrand-scratch PROPERTIES FOLDER scratch)
