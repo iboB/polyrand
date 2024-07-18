@@ -15,6 +15,10 @@ target_link_libraries(polyrand PUBLIC
 
 target_sources(polyrand PRIVATE
     polyrand/api.h
+
+    polyrand/device.hpp
+    polyrand/device.cpp
+
     polyrand/polyrand.h
     polyrand/polyrand-c.cpp
 )

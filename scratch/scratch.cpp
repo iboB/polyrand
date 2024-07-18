@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: MIT
 //
 #include <iostream>
-#include <polyrand/polyrand.h>
+#include <polyrand/device.hpp>
 
 int main() {
-    std::cout << add(4, 1, 10) << '\n';
+    std::cout << polyrand::get_device_random_number() << '\n';
 }
