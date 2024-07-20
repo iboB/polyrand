@@ -26,12 +26,16 @@ public:
     virtual void seed(uint64_t s) final override;
 
     virtual void seed(uint32_t s) = 0;
+
+    uint64_t operator()() { return i64(); }
 };
 
 class POLYRAND_API rng_i64 : public rng {
 public:
     // slice i64
     virtual uint32_t i32() final override;
+
+    uint32_t operator()() { return i32(); }
 };
 
 } // namespace polyrand
