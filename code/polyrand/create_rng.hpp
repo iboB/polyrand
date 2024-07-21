@@ -10,12 +10,15 @@
 #include <dynamix/domain.hpp>
 #include <dynamix/msg/msg_traits.hpp>
 #include <random>
+#include <new>
 
 namespace polyrand {
 
 template <typename G>
 class rng_mixin {
 public:
+    rng_mixin(uint64_t seed) : rng(typename G::result_type(seed)) {}
+
     G rng;
 
     static dynamix::util::mixin_info_data info_data;
@@ -24,8 +27,14 @@ public:
 template <typename G>
 dynamix::util::mixin_info_data rng_mixin<G>::info_data;
 
+struct rng_type_info {
+    const dynamix::type& type;
+    const dynamix::mixin_id id;
+    void (*init_func)(void* buf, uint64_t seed);
+};
+
 template <typename G>
-const dynamix::type& create_rng(std::string_view name) {
+rng_type_info create_rng(std::string_view name) {
     using rngm = rng_mixin<G>;
     auto& info_data = rngm::info_data;
 
@@ -43,7 +52,12 @@ const dynamix::type& create_rng(std::string_view name) {
     info_data.register_in(dom);
 
     const dynamix::mixin_info* q[] = {&info_data.info};
-    return dom.get_type(q);
+    auto& t = dom.get_type(q);
+    auto id = info_data.info.id;
+    auto init_func = +[](void* buf, uint64_t seed) {
+        new (buf) rng_mixin<G>(seed);
+    };
+    return {t, id, init_func};
 }
 
 } // namespace polyrand
