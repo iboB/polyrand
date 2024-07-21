@@ -5,6 +5,7 @@
 #include <polyrand/device.hpp>
 #include <polyrand/trng.hpp>
 #include <random>
+#include <memory>
 
 int main() {
     //std::cout << polyrand::get_device_random_number() << '\n';
