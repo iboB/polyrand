@@ -4,8 +4,16 @@
 #pragma once
 #include "api.h"
 #include <cstdint>
+#include <random>
 
 namespace polyrand {
+
+#define I_POLYRAND_DISTRIBUTIONS(MACRO) \
+    MACRO(std::uniform_int_distribution<int32_t>) \
+    MACRO(std::uniform_real_distribution<double>) \
+    MACRO(std::normal_distribution<double>) \
+    MACRO(std::discrete_distribution<uint32_t>) \
+
 
 class POLYRAND_API rng {
 public:
@@ -15,6 +23,10 @@ public:
     virtual uint64_t rand64() = 0;
 
     virtual void seed(uint64_t s) = 0;
+
+#define I_D_METHOD_DECLARE_PV(distribution) \
+        virtual distribution::result_type rand_with_d(distribution&) = 0;
+    I_POLYRAND_DISTRIBUTIONS(I_D_METHOD_DECLARE_PV)
 };
 
 class POLYRAND_API rng32 : public rng {

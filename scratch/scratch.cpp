@@ -6,13 +6,21 @@
 #include <polyrand/trng.hpp>
 #include <random>
 
-using minstd = polyrand::trng<std::minstd_rand>;
-
 int main() {
     //std::cout << polyrand::get_device_random_number() << '\n';
-    std::uniform_int_distribution<int> dist(0, 9);
+    std::unique_ptr<polyrand::rng> r = std::make_unique<polyrand::trng<std::mt19937>>(43);
 
-    minstd m(42);
-    std::cout << dist(m) << '\n';
-    std::cout << dist(m) << '\n';
+    std::uniform_int_distribution<int32_t> id(0, 20);
+    for (int i=0; i<10; ++i) {
+        std::cout << r->rand_with_d(id) << ' ';
+    }
+    std::cout << '\n';
+
+    std::uniform_real_distribution<double> rd(-1, 1);
+    for (int i=0; i<10; ++i) {
+        std::cout << r->rand_with_d(rd) << ' ';
+    }
+    std::cout << '\n';
+
+    return 0;
 }
