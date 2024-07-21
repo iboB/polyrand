@@ -1,8 +1,9 @@
 // Copyright (c) Borislav Stanimirov
 // SPDX-License-Identifier: MIT
 //
-#include "rng.hpp"
+#include "domain.hpp"
+#include <dynamix/define_domain.hpp>
 
 namespace polyrand {
-
-} // namespace polyrand
+DYNAMIX_DEFINE_DOMAIN(domain);
+}

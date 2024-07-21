@@ -3,39 +3,24 @@
 //
 #pragma once
 #include "api.h"
+#include <dynamix/object.hpp>
+#include <dynamix/object_of.hpp>
 #include <cstdint>
 
 namespace polyrand {
 
-class POLYRAND_API rng {
+class rng : public dynamix::object {
 public:
-    virtual ~rng();
+    using dynamix::object::object;
 
-    virtual uint32_t i32() = 0;
-    virtual uint64_t i64() = 0;
-
-    virtual void seed(uint64_t s) = 0;
+    static rng* of(void* mixin) {
+        return static_cast<rng*>(dynamix::object_of(mixin));
+    }
+    static const rng* of(const void* mixin) {
+        return static_cast<const rng*>(dynamix::object_of(mixin));
+    }
 };
 
-class POLYRAND_API rng_i32 : public rng {
-public:
-    // call i32 two times
-    virtual uint64_t i64() final override;
-
-    // seed slice to 32 bits
-    virtual void seed(uint64_t s) final override;
-
-    virtual void seed(uint32_t s) = 0;
-
-    uint64_t operator()() { return i64(); }
-};
-
-class POLYRAND_API rng_i64 : public rng {
-public:
-    // slice i64
-    virtual uint32_t i32() final override;
-
-    uint32_t operator()() { return i32(); }
-};
+#define polyrand_rng_self ::polyrand::rng::of(this)
 
 } // namespace polyrand
