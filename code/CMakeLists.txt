@@ -19,6 +19,9 @@ target_sources(polyrand PRIVATE
     polyrand/device.hpp
     polyrand/device.cpp
 
+    polyrand/rng.hpp
+    polyrand/rng.cpp
+
     polyrand/polyrand.h
     polyrand/polyrand-c.cpp
 )

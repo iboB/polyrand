@@ -11,31 +11,30 @@ class POLYRAND_API rng {
 public:
     virtual ~rng();
 
-    virtual uint32_t i32() = 0;
-    virtual uint64_t i64() = 0;
+    virtual uint32_t rand32() = 0;
+    virtual uint64_t rand64() = 0;
 
     virtual void seed(uint64_t s) = 0;
 };
 
-class POLYRAND_API rng_i32 : public rng {
+class POLYRAND_API rng32 : public rng {
 public:
+    virtual uint32_t rand() = 0;
+
+    virtual uint32_t rand32() final override { return rand(); }
+
     // call i32 two times
-    virtual uint64_t i64() final override;
-
-    // seed slice to 32 bits
-    virtual void seed(uint64_t s) final override;
-
-    virtual void seed(uint32_t s) = 0;
-
-    uint64_t operator()() { return i64(); }
+    virtual uint64_t rand64() final override;
 };
 
-class POLYRAND_API rng_i64 : public rng {
+class POLYRAND_API rng64 : public rng {
 public:
-    // slice i64
-    virtual uint32_t i32() final override;
+    virtual uint64_t rand() = 0;
 
-    uint32_t operator()() { return i32(); }
+    // slice i64
+    virtual uint32_t rand32() final override;
+
+    virtual uint64_t rand64() final override { return rand(); }
 };
 
 } // namespace polyrand
